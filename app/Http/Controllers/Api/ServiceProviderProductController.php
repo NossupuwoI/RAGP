@@ -15,7 +15,7 @@ class ServiceProviderProductController extends Controller
         $request->validate([
             'zone' => 'nullable|string|max:3',
             'country' => 'nullable|string|size:2',
-            'service_category_id' => 'nullable|integer|exists:service_categories,id',
+            'service_type_id' => 'nullable|integer|exists:service_types,id',
         ]);
 
         $query = ServiceProviderProduct::with(['serviceProvider', 'serviceType']);
@@ -32,14 +32,13 @@ class ServiceProviderProductController extends Controller
             });
         }
 
-        if ($request->filled('service_category_id')) {
-            $query->whereHas('serviceProvider', function ($q) use ($request) {
-                $q->where('service_category_id', $request->service_category_id);
-            });
+        if ($request->filled('service_type_id')) {
+            $query->where('service_type_id', $request->service_type_id);
         }
 
         return response()->json($query->get());
     }
+
 
     // Création
     public function store(Request $request)
