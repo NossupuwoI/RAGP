@@ -16,6 +16,6 @@ class ServiceCategory extends Model
 
     public function products()
     {
-        return $this->hasMany(ServiceProviderProduct::class);
+        return $this->hasMany(ServiceCategory::class);
     }
 }

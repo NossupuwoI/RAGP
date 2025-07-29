@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('service_providers', function (Blueprint $table) {
             $table->id();
-            $table->string('zone', 3);  
-            $table->string('country', 2);  
-            $table->string('name');
+            $table->foreignId('service_category_id')->constrained('service_categories')->onDelete('cascade')->index();
+            $table->string('zone', 3)->index();
+            $table->string('country', 2)->index();
+            $table->string('name', 255);
             $table->string('logo')->nullable();
-            $table->string('code')->unique();
-            $table->boolean('status')->default(true);
+            $table->string('code', 100)->unique();
+            $table->boolean('status')->default(true)->index();
             $table->timestamps();
         });
     }

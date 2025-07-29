@@ -12,11 +12,19 @@ class ServiceProviderProduct extends Model
     protected $fillable = [
         'service_provider_id',
         'service_type_id',
-        'service_category_id',
         'name',
         'code',
+        'price_fixed',
         'price',
         'commission'
+    ];
+
+    // Cast les attributs pour que Eloquent les convertisse automatiquement :
+    // - 'price' sera manipulé comme un tableau PHP (stocké en JSON en base)
+    // - 'price_fixed' sera traité comme un booléen
+    protected $casts = [
+        'price' => 'array',
+        'price_fixed' => 'boolean',
     ];
 
     public function serviceProvider()
@@ -27,10 +35,5 @@ class ServiceProviderProduct extends Model
     public function serviceType()
     {
         return $this->belongsTo(ServiceType::class);
-    }
-
-    public function serviceCategory()
-    {
-        return $this->belongsTo(ServiceCategory::class);
     }
 }

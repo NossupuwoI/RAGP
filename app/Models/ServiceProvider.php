@@ -10,11 +10,22 @@ class ServiceProvider extends Model
     use HasFactory;
 
     protected $fillable = [
-        'zone', 'country', 'name', 'logo', 'code', 'status'
+        'service_category_id',
+        'zone',
+        'country',
+        'name',
+        'logo',
+        'code',
+        'status'
     ];
 
     public function products()
     {
         return $this->hasMany(ServiceProviderProduct::class);
+    }
+
+    public function serviceCategory()
+    {
+        return $this->belongsTo(ServiceCategory::class);
     }
 }

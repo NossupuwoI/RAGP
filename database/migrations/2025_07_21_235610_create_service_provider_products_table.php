@@ -19,7 +19,6 @@ return new class extends Migration
           
             $table->foreignId('service_provider_id') ->constrained('service_providers') ->onDelete('cascade');
             $table->foreignId('service_type_id') ->constrained('service_types') ->onDelete('cascade');
-            $table->foreignId('service_category_id') ->constrained('service_categories') ->onDelete('cascade');
             $table->string('name');
             $table->string('code')->unique();
              $table->boolean('price_fixed')->default(true); 
